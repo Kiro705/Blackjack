@@ -12,8 +12,9 @@ var value = [11,2,3,4,5,6,7,8,9,10,10,10,10];
 var altValue = [1,2,3,4,5,6,7,8,9,10,10,10,10];
 var hand = [0,0];
 var score = 0;
-while(money > 0){
-	var ace = 1;
+while(playing === true){
+	var dealerPlay = false;
+	var resolve = false;
 	console.log ("You have $" + money + ".");
 	var hand = [Math.floor((Math.random() * 13)),Math.floor((Math.random() * 13))];
 	var score = value[hand[0]] + value[hand[1]];
@@ -23,89 +24,104 @@ while(money > 0){
 	var dscore = value[dealer[0]] + value[dealer[1]];
 	console.log('The dealer has a ' + deck[dealer[0]] + " face up.")
 
-var deal = true;
-var stay = false;
-var hitting = false;
+	var deal = true;
+	var stay = false;
+	var hitting = false;
 
-while(deal === true){
-	if(score > 21){
-		console.log ("You busted!");
-		deal = false;
-		hitting = false;
-	}
-	else if (score === 21){
-		console.log('You have Blackjack!');
-		deal = false;
-		hitting = false;
-	}
-	else if (stay === true){
-		console.log("You have stayed.")
-		console.log("Your final score is "+ score + ".")
-		deal = false;
-		hitting = false;
-	}
-	else{
-		var hit = 0;
-		var hitting = true;
-	}
-	while (hitting === true){
-		var hit = window.prompt('Would you like to hit or stay? Type quit to exit game.');
-		if(hit === "hit") {
-			var draw = Math.floor((Math.random() * 13));
-			score = score + value[draw];
-			console.log('You hit!');
-			console.log("You drew a " + deck[draw]);
-			console.log("Your new score is " + score + ".");
-			hitting = false;
-		}
-		else if (hit === "stay"){
-			stay = true;
-			hitting = false;
-		}
-		else if (hit === "quit"){
-			console.log("Thanks for playing!");
-			money = 0;
-			hitting = false;
+	while(deal === true){
+		if(score > 21){
+			console.log ("You busted!");
 			deal = false;
-			score = 0;
-			dscore = 21;
-			break;
-			//Trying to end the program here.
+			hitting = false;
+			dealerPlay = false;
+			resolve = true;
+		}
+		else if (score === 21){
+			console.log('You have Blackjack!');
+			deal = false;
+			hitting = false;
+			dealerPlay = false;
+			resolve = true;
+		}
+		else if (stay === true){
+			console.log("You have stayed.")
+			console.log("Your final score is "+ score + ".")
+			deal = false;
+			hitting = false;
+			dealerPlay = true;
 		}
 		else{
-			console.log("I'm sorry, I didn't hear you.");
+			var hit = 0;
+			var hitting = true;
 		}
-	}		
-}
-console.log ('The dealer has ' + deck[dealer[0]] + ' and ' + deck[dealer[1]]+ '.');
-
-var dnew = [Math.floor((Math.random() * 13)),Math.floor((Math.random() * 13)),Math.floor((Math.random() * 13))];
-var i = 0;
-while(dscore < 17){
-	dscore = dscore + value[dnew[i]];
-	if(dscore > 21){
-		dscore = 'busted!';
+		while (hitting === true){
+			var hit = window.prompt('Would you like to hit or stay? Type quit to exit game.');
+			if(hit === "hit") {
+				var draw = Math.floor((Math.random() * 13));
+				score = score + value[draw];
+				console.log('You hit!');
+				console.log("You drew a " + deck[draw]);
+				console.log("Your new score is " + score + ".");
+				hitting = false;
+			}
+			else if (hit === "stay"){
+				stay = true;
+				hitting = false;
+				dealerPlay = true;
+			}
+			else if (hit === "quit"){
+				console.log("Thanks for playing!");
+				console.log("You walked away with $"+money+".");
+				hitting = false;
+				dealerPlay = false;
+				resolve = false;
+				playing = false;
+				deal = false;
+				//Trying to end the program here.
+			}
+			else{
+				console.log("I'm sorry, I didn't hear you.");
+			}
+		}		
 	}
-	console.log('The dealer drew ' + deck[dnew[i]] + '.');
-	i++;
-}
-if (score > 21){
-	console.log('You lost the hand.');
-	money = money - 10;
+	while (dealerPlay === true){
+		console.log ('The dealer has ' + deck[dealer[0]] + ' and ' + deck[dealer[1]]+ '.');
+		var dnew = [Math.floor((Math.random() * 13)),Math.floor((Math.random() * 13)),Math.floor((Math.random() * 13))];
+		var i = 0;
+		while(dscore < 17){
+			dscore = dscore + value[dnew[i]];
+			if(dscore > 21){
+				dscore = 'busted!';
+			}
+			console.log('The dealer drew ' + deck[dnew[i]] + '.');
+			i++;
+		}
+		dealerPlay = false;
+		resolve = true;
 	}
-else if (score < dscore){
-	console.log('The dealer drew to ' + dscore + '.');
-	console.log('You lost the hand.');
-	money = money - 10;
-}
-else{
-	console.log('The dealer drew to ' + dscore + '.');
-	console.log('You won the hand!');
-	money = money + 10;
-}
-}
-if (money <= 0){
-	console.log('You are out of money!');
+	while (resolve === true){
+		if (score > 21){
+			console.log('You lost the hand.');
+			money = money - 10;
+			resolve = false;
+		}
+		else if (score < dscore){
+			console.log('The dealer drew to ' + dscore + '.');
+			console.log('You lost the hand.');
+			money = money - 10;
+			resolve = false;
+		}
+		else{
+			console.log('The dealer drew to ' + dscore + '.');
+			console.log('You won the hand!');
+			money = money + 10;
+			resolve = false;
+		}
+	}
+	if (money <= 0){
+		console.log('You are out of money!');
+		playing = false;
+	}
 }
 
 };
