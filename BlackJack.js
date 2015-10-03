@@ -1,6 +1,7 @@
 //Simple Blackjack game!
 //The chance of any card being drawn is always 1 in 13, even if there have been other cards drawn.
 //Ace will always count as 11.
+var play = function(){
 console.log('Welcome to the Blackjack table!');
 console.log('Here is $100 to start, and each hand will cost $10.');
 var money = 100;
@@ -8,6 +9,7 @@ var money = 100;
 var playing = true;
 var deck = ['Ace','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten','Jack','Queen','King'];
 var value = [11,2,3,4,5,6,7,8,9,10,10,10,10];
+var altValue = [1,2,3,4,5,6,7,8,9,10,10,10,10];
 var hand = [0,0];
 var score = 0;
 while(money > 0){
@@ -105,3 +107,6 @@ else{
 if (money <= 0){
 	console.log('You are out of money!');
 }
+
+};
+
