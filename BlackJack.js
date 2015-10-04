@@ -32,7 +32,6 @@ while(playing === true){
 	var dealer = [Math.floor((Math.random() * 13)),Math.floor((Math.random() * 13))];
 	var dscore = value[dealer[0]] + value[dealer[1]];
 	console.log('The dealer has a ' + deck[dealer[0]] + " face up.");
-	console.log(score + altValue[draw[1 - 1]]);
 	var deal = true;
 	var stay = false;
 	var hitting = false;
@@ -142,6 +141,7 @@ while(playing === true){
 		}
 		dealerPlay = false;
 		resolve = true;
+
 	}
 	while (resolve === true){
 		if (score > 21){
@@ -153,6 +153,11 @@ while(playing === true){
 			console.log('The dealer drew to ' + dscore + '.');
 			console.log('You lost the hand.');
 			money = money - 10;
+			resolve = false;
+		}
+		else if (score == dscore){
+			console.log('The dealer drew to ' + dscore + '.');
+			console.log('You tied the dealer.')
 			resolve = false;
 		}
 		else{
