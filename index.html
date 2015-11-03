@@ -1,31 +1,27 @@
-<!doctype html>
+<!DOCTYPE html>
  <html>
-	<script type="text/javascript" src="Blackjack.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
    <link href="https://s3.amazonaws.com/codecademy-content/projects/bootstrap.min.css" rel="stylesheet" />
     <link href='https://fonts.googleapis.com/css?family=Roboto:500,300,700,400' rel='stylesheet' type='text/css'>
-    <link href="css/main.css" rel="stylesheet" />
+    <script type="text/javascript" src="Blackjack.js"></script>
+    <link href="css/main.css" type="text/css" rel="stylesheet" />
     <head>
     	<title>Blackjack!</title>
     </head>
 	<body ng-app="myApp">
    		<div class="header">
-      		<div class="container">
-        		<div ng-controller="titles">
-         			<h1>Blackjack</h1>
-          			<p>The game will take place in the console window.</p>
-          			<p>To open the console press &#8984; + alt + J</p>
-          			<div class="button">
-          				<button type="button" onclick= play()>Begin Blackjack</button>
-          			</div>
-        		</div>
-      		</div>
+        <h1>Blackjack</h1>
+        <p>The game will take place in the console window.</p>
+        <p>To open the console press &#8984; + alt + J</p>
+        <div class="button">
+          <button onclick= play()>Begin Blackjack</button>
+        </div>
     	</div>
 
-    	<div class="main" ng-controller="money">
-    		<div class="container">
-       			<div class = "col-md-3"> 
-        		</div>
-			</div>
-		</div>
+    	<div class="border">
+        <div id="money">
+          <p id='cash'></p>
+        </div>
+      </div>
 	</body>
 </html>

@@ -6,11 +6,8 @@ html, body {
 }
 
 .header {
- padding: 15px;
-}
-
-.header img {
-   display: inline-block;
+ padding: 15px 15px 15px 100px;
+ background-color: #F2F2F2;
 }
 
 .header h1 {
@@ -23,28 +20,21 @@ html, body {
    padding-left: 20px;
 }
 
-.main {
+.header button {
+   margin-left: 20px;
+}
+
+.border {
  background-color: #B2F5CC ;
- padding: 40px 0;
+ padding: 30px;
 }
 
-.main h1 {
- color: #F65A5B ;
- font-size: 64px;
- margin: 0 0 80px 0;
- padding: 20px 0;
-   line-height: 60px;
-   width: 50%;
-}
-
-.main h2 {
- background-color: #DDDDDD ;
- color: #999999 ;
- font-size: 20px;
- margin: 0 0 40px 0;
- padding: 20px 0;
-}
-
-.button {
-   padding-left: 20px;
+#money {
+	height: 30px;
+	width: 180px;
+	margin-left: 150px;
+	border-radius: 10px;
+	font-size: 16px;
+	background-color: #F2F2F2;
+	padding: 5px 0px 5px 15px;
 }
