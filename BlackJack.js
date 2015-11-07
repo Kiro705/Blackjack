@@ -1,5 +1,5 @@
 //Simple Blackjack game!
-//The chance of any card being drawn is always 1 in 13, even if there have been other cards drawn.
+
 var cards = [];
 var money = function(){
 	$(document).ready(function(){
@@ -7,6 +7,22 @@ var money = function(){
 		$('#money').prepend("<p id='cash'></p>");
 		document.getElementById('cash').innerHTML = 'Money: $' + $money;
 	});
+}
+
+var changeText = function(){
+	$(document).ready(function(){
+		var $text1 = text1;
+		var $text2 = text2;
+		var $text3 = text3;
+		$('.text').remove();
+		$('#textBox').prepend("<p class='text' id='text1'></p>");
+		document.getElementById('text1').innerHTML = $text1;
+		$('#textBox').append("<p class='text' id='text2'></p>");
+		document.getElementById('text2').innerHTML = $text2;
+		$('#textBox').append("<p class='text' id='text3'></p>");
+		document.getElementById('text3').innerHTML = $text3;
+	});
+
 }
 
 function shuffle(array) {
@@ -39,29 +55,43 @@ var makeDeck = function(){
     	return cards;
 	}
 	deck();
-	console.log('the top 4 cards are...');
-	console.log(cards[0]);
-	console.log(cards[1]);
-	console.log(cards[2]);
-	console.log(cards[3]);
-	console.log(cards[4]);
-	console.log(cards[5]);
 }
 
-var $money = 100;
-money();
-var play = function(){
-console.log('Welcome to the Blackjack table!');
-console.log('Here is $100 to start, and each hand will cost $10.');
-$money = 100;
+var letsplay = function(){
+	$(document).ready(function(){
+		$('#play').remove();
+		$('#buttonBox').append("<button class='button' id='deal' onclick=dealme()>Deal</button>");
+	});
+	play();
+};
 
-var playing = true;
+var dealme = function(){
+	$(document).ready(function(){
+		$('.button').remove();
+	});
+	$money = $money - 10;
+	money();
+	dealPhase();
+}
+
+var $money = 0;
+money();
+
 var value = [11,2,3,4,5,6,7,8,9,10,10,10,10];
 var altValue = [1,2,3,4,5,6,7,8,9,10,10,10,10];
+
+var play = function(){
+text1 = 'Welcome to the Blackjack table!';
+text2 = 'Here is $100 to start, and each hand will cost $10.';
+text3 = '';
+changeText();
+$money = 100;
+money();
 var hand = [0,0];
 var aces = 0;
 var daces = 0;
-while(playing === true){
+}
+var dealPhase = function() {
 	makeDeck();
 	var hit = 0;
 	var dealerPlay = false;
@@ -70,28 +100,35 @@ while(playing === true){
 	var hand = [cards.shift(),cards.shift()];
 	var dealer = [cards.shift(),cards.shift()];
 	var score = 0
+	text1 = 'Your hand is '+ hand[0].rank + ' and '+ hand[1].rank +".";
 	console.log('Your hand is '+ hand[0].rank + ' and '+ hand[1].rank +".");
 	if (hand[0].rank === 'Ace' && hand[1].rank === 'Ace'){
 		score = 12;
 		console.log('This adds up to 12.');
+		text2 = 'This adds up to 12.';
 		aces = 1;
 	}
 	else if (hand[0].rank === 'Ace' || hand[1].rank === 'Ace'){
 		score = value[hand[0].number - 1] + value[hand[1].number - 1];
 		console.log('This adds up to '+ score +'.');
+		text2 = 'This adds up to '+ score +'.';
 		aces = 1;
 	}
 	else{
 		score = value[hand[0].number - 1] + value[hand[1].number - 1];
 		console.log('This adds up to '+ score +'.');
+		text2 = 'This adds up to '+ score +'.';
 		aces = 0;
 	}
 	var dscore = value[dealer[0].number - 1] + value[dealer[1].number - 1];
 	console.log('The dealer has a ' + dealer[0].rank + " face up.");
+	text3 = 'The dealer has a ' + dealer[0].rank + " face up.";
+	changeText();
 	var deal = true;
 	var stay = false;
 	var hitting = false;
-
+};
+var hitPhase = function(){
 	while(deal === true){
 		if(score > 21){
 			console.log ("You busted!");
@@ -160,6 +197,8 @@ while(playing === true){
 			}
 		}		
 	}
+};
+var resolvePhase = function(){
 	while (dealerPlay === true){
 		console.log ('The dealer has ' + dealer[0].rank + ' and ' + dealer[1].rank + '.');
 		if (dealer[0].rank === 'Ace' && dealer[1].rank === 'Ace'){
@@ -204,30 +243,27 @@ while(playing === true){
 		if (score > 21){
 			//Busted
 			console.log('You lost the hand.');
-			$money = $money - 10;
 			resolve = false;
-			money();
 		}
 		else if (score < dscore){
 			//Dealer wins
 			console.log('The dealer drew to ' + dscore + '.');
 			console.log('You lost the hand.');
-			$money = $money - 10;
 			resolve = false;
-			money();
 		}
 		else if (score == dscore){
 			//Dealer ties
 			console.log('The dealer drew to ' + dscore + '.');
 			console.log('You tied the dealer.')
 			resolve = false;
+			$money = $money + 10;
 			money();
 		}
 		else{
 			//You win
 			console.log('The dealer drew to ' + dscore + '.');
 			console.log('You won the hand!');
-			$money = $money + 10;
+			$money = $money + 20;
 			resolve = false;
 			money();
 		}
@@ -237,7 +273,4 @@ while(playing === true){
 		console.log('You are out of money!');
 		playing = false;
 	}
-}
-
 };
-

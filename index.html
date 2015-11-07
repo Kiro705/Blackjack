@@ -11,10 +11,10 @@
 	<body ng-app="myApp">
    		<div class="header">
         <h1>Blackjack</h1>
-        <p>The game will take place in the console window.</p>
-        <p>To open the console press &#8984; + alt + J</p>
-        <div class="button">
-          <button onclick= play()>Begin Blackjack</button>
+        <!--<p>The game will take place in the console window.</p>
+        <p>To open the console press &#8984; + alt + J</p> -->
+        <div id="play">
+          <button style='font-family: Courier' onclick= letsplay()>Begin Blackjack</button>
         </div>
     	</div>
 
@@ -24,6 +24,8 @@
         </div>
       </div>
       <div class="board">
+        <div id = "buttonBox">
+        </div>
         <div id="player">
             Player
         </div>
@@ -31,7 +33,10 @@
             Dealer
         </div>
       </div>
-      <div class="border">
+      <div class="border" style="height: 170px">
+        <div id="textBox">
+          <p class='text' id="text1">Would you like to play?</p>
+        </div>
       </div>
 	</body>
 </html>
