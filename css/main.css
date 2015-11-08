@@ -78,6 +78,7 @@ html, body {
 	margin: 40px 0px 0px 50px;
 	font-family: Courier;
 	text-indent: 10px;
+	padding-left: 35px;
 }
 
 #dealer {
@@ -89,6 +90,40 @@ html, body {
 	margin: 40px 50px 0px 0px;
 	font-family: Courier;
 	text-indent: 10px;
+	padding-left: 35px;
+}
+
+.card {
+	background-color: #FFFFFF;
+	height: 100px;
+	width: 70px;
+	box-shadow: 5px 5px 10px #888888;
+	margin-top: 10px;
+	margin-right: 10px;
+	display: inline-block;
+	border-radius: 10px;
+}
+
+.cardBack {
+	background-color: #FFFFFF;
+	height: 100px;
+	width: 70px;
+	box-shadow: 5px 5px 10px #888888;
+	margin-top: 10px;
+	margin-right: 10px;
+	display: inline-block;
+	border-radius: 10px;
+}
+
+.img img{
+	margin: 12.5px 0px 0px 10px;
+	display: inline;
+}
+
+.back img{
+	border-radius: 10px;
+	margin: 2px 0px 0px -8px;
+	display: inline-flex;
 }
 
 #textBox {
