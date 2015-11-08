@@ -280,7 +280,7 @@ var resolvePhase = function(){
 		dscore = 12;
 		daces = 1;
 	}
-	else if (dealer[0].rank === 0 || dealer[1].rank === 0){
+	else if (dealer[0].rank === 'Ace' || dealer[1].rank === 'Ace'){
 		daces = 1;
 	}
 	var dhitting = true;
