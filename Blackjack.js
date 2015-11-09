@@ -285,7 +285,7 @@ var resolvePhase = function(){
 	}
 	var dhitting = true;
 	while (dhitting === true){
-		while (dscore < 17){
+		if (dscore < 17){
 			var dnew = cards.shift();
 			dcard = dnew;
 			showDcard();
@@ -304,7 +304,7 @@ var resolvePhase = function(){
 				}
 			}
 		}
-		if (dscore > 21) {
+		else if (dscore > 21) {
 			dscore = 'busted';
 			dhitting = false;
 		}
